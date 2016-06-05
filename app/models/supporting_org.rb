@@ -1,3 +1,3 @@
 class SupportingOrg < ActiveRecord::Base
-  # Remember to create a migration!
+  has_many :politicians, through: :politicians_supporting_orgs, foreign_key: "politician_id"
 end
