@@ -22,12 +22,12 @@ namespace :generate do
       raise "ERROR: Model file '#{model_path}' already exists"
     end
 
-    puts "Creating #{model_path}"
-    File.open(model_path, 'w+') do |f|
-      f.write(<<-EOF.strip_heredoc)
-        class #{model_name} < ActiveRecord::Base
-          # Remember to create a migration!
-        end
+  puts "Creating #{model_path}"
+  File.open(model_path, 'w+') do |f|
+    f.write(<<-EOF.strip_heredoc)
+      class #{model_name} < ActiveRecord::Base
+        # Remember to create a migration!
+      end
       EOF
     end
   end
@@ -53,91 +53,99 @@ namespace :generate do
           def change
           end
         end
-      EOF
-    end
-  end
-
-  desc "Create an empty model spec in spec, e.g., rake generate:spec NAME=user"
-  task :spec do
-    unless ENV.has_key?('NAME')
-      raise "Must specificy migration name, e.g., rake generate:spec NAME=user"
+        EOF
+      end
     end
 
-    name     = ENV['NAME'].camelize
-    filename = "%s_spec.rb" % ENV['NAME'].underscore
-    path     = APP_ROOT.join('spec', filename)
+    desc "Create an empty model spec in spec, e.g., rake generate:spec NAME=user"
+    task :spec do
+      unless ENV.has_key?('NAME')
+        raise "Must specificy migration name, e.g., rake generate:spec NAME=user"
+      end
 
-    if File.exist?(path)
-      raise "ERROR: File '#{path}' already exists"
-    end
+      name     = ENV['NAME'].camelize
+      filename = "%s_spec.rb" % ENV['NAME'].underscore
+      path     = APP_ROOT.join('spec', filename)
 
-    puts "Creating #{path}"
-    File.open(path, 'w+') do |f|
-      f.write(<<-EOF.strip_heredoc)
-        require 'spec_helper'
+      if File.exist?(path)
+        raise "ERROR: File '#{path}' already exists"
+      end
 
-        describe #{name} do
+      puts "Creating #{path}"
+      File.open(path, 'w+') do |f|
+        f.write(<<-EOF.strip_heredoc)
+          require 'spec_helper'
+
+          describe #{name} do
           pending "add some examples to (or delete) #{__FILE__}"
         end
-      EOF
+        EOF
+      end
+    end
+
+  end
+
+  namespace :db do
+    desc "Create the database at #{DB_NAME}"
+    task :create do
+      puts "Creating database #{DB_NAME} if it doesn't exist..."
+      exec("createdb #{DB_NAME}")
+    end
+
+    desc "Drop the database at #{DB_NAME}"
+    task :drop do
+      puts "Dropping database #{DB_NAME}..."
+      exec("dropdb #{DB_NAME}")
+    end
+
+    desc "Reset the database at #{DB_NAME}"
+    task :reset do
+      puts "Dropping database #{DB_NAME}..."
+      exec("dropdb #{DB_NAME}")
+      puts "Creating database #{DB_NAME} if it doesn't exist..."
+      exec("createdb #{DB_NAME}")
+      ActiveRecord::Migrator.migrations_paths << File.dirname(__FILE__) + 'db/migrate'
+      ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
+      ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, ENV["VERSION"] ? ENV["VERSION"].to_i : nil) do |migration|
+        ENV["SCOPE"].blank? || (ENV["SCOPE"] == migration.scope)
+        require APP_ROOT.join('db', 'seeds.rb')
+      end
+    end
+
+    desc "Migrate the database (options: VERSION=x, VERBOSE=false, SCOPE=blog)."
+    task :migrate do
+      ActiveRecord::Migrator.migrations_paths << File.dirname(__FILE__) + 'db/migrate'
+      ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
+      ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, ENV["VERSION"] ? ENV["VERSION"].to_i : nil) do |migration|
+        ENV["SCOPE"].blank? || (ENV["SCOPE"] == migration.scope)
+      end
+    end
+
+    desc "Populate the database with dummy data by running db/seeds.rb"
+    task :seed do
+      require APP_ROOT.join('db', 'seeds.rb')
+    end
+
+    desc "rollback your migration--use STEPS=number to step back multiple times"
+    task :rollback do
+      steps = (ENV['STEPS'] || 1).to_i
+      ActiveRecord::Migrator.rollback('db/migrate', steps)
+      Rake::Task['db:version'].invoke if Rake::Task['db:version']
+    end
+
+    desc "Returns the current schema version number"
+    task :version do
+      puts "Current version: #{ActiveRecord::Migrator.current_version}"
     end
   end
 
-end
-
-namespace :db do
-  desc "Create the database at #{DB_NAME}"
-  task :create do
-    puts "Creating database #{DB_NAME} if it doesn't exist..."
-    exec("createdb #{DB_NAME}")
+  desc 'Start PRY with application environment loaded'
+  task "console" do
+    exec "pry -r./config/environment"
   end
 
-  desc "Drop the database at #{DB_NAME}"
-  task :drop do
-    puts "Dropping database #{DB_NAME}..."
-    exec("dropdb #{DB_NAME}")
-  end
+  desc "Run the specs"
+  RSpec::Core::RakeTask.new(:spec)
 
-  desc "Reset the database at #{DB_NAME}"
-  task :reset do
-    puts "Dropping database #{DB_NAME}..."
-    exec("dropdb #{DB_NAME}")
-    puts "Creating database #{DB_NAME} if it doesn't exist..."
-    exec("createdb #{DB_NAME}")
-    ActiveRecord::Migrator.migrations_paths << File.dirname(__FILE__) + 'db/migrate'
-    ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
-    ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, ENV["VERSION"] ? ENV["VERSION"].to_i : nil) do |migration|
-      ENV["SCOPE"].blank? || (ENV["SCOPE"] == migration.scope)
-    require APP_ROOT.join('db', 'seeds.rb')
-  end
+  task :default  => :specs
 
-  desc "Migrate the database (options: VERSION=x, VERBOSE=false, SCOPE=blog)."
-  task :migrate do
-    ActiveRecord::Migrator.migrations_paths << File.dirname(__FILE__) + 'db/migrate'
-    ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
-    ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, ENV["VERSION"] ? ENV["VERSION"].to_i : nil) do |migration|
-      ENV["SCOPE"].blank? || (ENV["SCOPE"] == migration.scope)
-    end
-  end
-
-  desc "Populate the database with dummy data by running db/seeds.rb"
-  task :seed do
-    require APP_ROOT.join('db', 'seeds.rb')
-  end
-
-  desc "Returns the current schema version number"
-  task :version do
-    puts "Current version: #{ActiveRecord::Migrator.current_version}"
-  end
-end
-
-desc 'Start PRY with application environment loaded'
-task "console" do
-  exec "pry -r./config/environment"
-end
-
-desc "Run the specs"
-RSpec::Core::RakeTask.new(:spec)
-
-task :default  => :specs
-end
