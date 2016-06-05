@@ -6,14 +6,14 @@ Polisci is focusing on demystifying local political candidates to the general pu
 This app allows users to browse through a politician's full history and voting stats in a dynamic manner.
 
 ##Technologies Used
-*Back End: Sinatra, ActiveRecord, PostgreSQL
-*Front End: Javascript, jQuery, AJAX, HTML, CSS, Materialize, Highcharts
-*APIs: Vote Smart
+* Back End: Sinatra, ActiveRecord, PostgreSQL
+* Front End: Javascript, jQuery, AJAX, HTML, CSS, Materialize, Highcharts
+* APIs: Vote Smart
 
 ##Challenges We Faced
 
 ##Next Steps
 
 ##The Team
-*Sneha Narasimhan
-*Olya Royall
+* Sneha Narasimhan
+* Olya Royall
