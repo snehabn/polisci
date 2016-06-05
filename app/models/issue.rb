@@ -1,3 +1,3 @@
 class Issue < ActiveRecord::Base
-  # Remember to create a migration!
+  has_many :bills
 end
