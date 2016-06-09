@@ -22,6 +22,7 @@ GEM
     coderay (1.1.1)
     daemons (1.2.3)
     diff-lcs (1.2.5)
+    dotenv (2.1.1)
     eventmachine (1.2.0.1)
     faker (1.6.3)
       i18n (~> 0.5)
@@ -30,6 +31,7 @@ GEM
     method_source (0.8.2)
     minitest (5.9.0)
     multi_json (1.12.1)
+    patron (0.6.5)
     pg (0.18.4)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -79,6 +81,8 @@ GEM
     tilt (2.0.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    votesmart (0.4.1)
+      patron (>= 0.4.6)
 
 PLATFORMS
   ruby
@@ -87,6 +91,7 @@ DEPENDENCIES
   activerecord
   activesupport
   bcrypt
+  dotenv
   faker
   pg
   pry-byebug
@@ -96,6 +101,7 @@ DEPENDENCIES
   sinatra
   sinatra-contrib
   thin
+  votesmart (~> 0.4.1)
 
 BUNDLED WITH
    1.12.5
