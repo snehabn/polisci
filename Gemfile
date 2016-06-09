@@ -1,4 +1,4 @@
-source :rubygems
+source "https://rubygems.org"
 
 # PostgreSQL driver
 gem 'pg'
@@ -20,6 +20,8 @@ gem 'pry-byebug'
 
 gem 'shotgun'
 gem 'faker'
+gem 'votesmart', '~> 0.4.1'
+gem 'dotenv'
 
 group :test do
   gem 'rspec'
