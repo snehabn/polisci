@@ -1,6 +1,13 @@
 <div class="container">
+<h1> Federal Officials </h1>
 <% @candidates.each do |candidate| %>
-<p><%= candidate["lastName"] %></p>
+<p><a href='/candidates/<%= candidate["candidateId"] %>'><%= candidate["lastName"] %></a></p>
+  <p>Office Position: <%= candidate["electionOffice"] %></p>
+<% end %>
+<h1> Local Officials </h1>
+<% @local_officials.each do |local_official| %>
+<p><a href='/candidates/<%= local_official["candidateId"] %>'><%= local_official["lastName"] %></a></p>
+  <p>Office Position: <%= local_official["officeName"] %></p>
 <% end %>
 </div>
 
