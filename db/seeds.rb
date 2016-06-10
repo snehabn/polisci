@@ -16,7 +16,10 @@ candidates.each do |candidate|
   votes.each do |vote|
     Vote.create(vote: vote, candidate_id: c.id)
   end
-  VoteSmart::CandidateBio.request("CandidateBio.getDetailedBio", "candidateId" => 22377)
+
+  CampaignContact.create(address: VoteSmart::Address.get_campaign(candidate["candidateId"])['address']['office']['phone'], web:VoteSmart::Address.get_campaign_web_address(candidate["candidateId"])['webaddress']['address'], candidate_id: c.id)
+
+  CandidateBio.create(candidate_bio: VoteSmart::CandidateBio.request("CandidateBio.getDetailedBio", "candidateId" => candidate["candidateId"]), candidate_id: c.id)
 end
 
 
