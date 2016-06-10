@@ -7,6 +7,11 @@
 */
 body {
   font-family: Helvetica;
+  background: url('http://www.planwallpaper.com/static/images/colorful-triangles-background_yB0qTG6.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #ffe57f;
 }
 
 .float_wrapper {
@@ -40,6 +45,7 @@ footer {
 header h1 {
   margin: 0;
   font-size: 4em;
+  color: #1a237e;
 }
 
 main {
@@ -57,4 +63,22 @@ main {
 
 #candidate-list {
   display: none;
+}
+
+.official {
+  font-size: 2em;
+  color: #ffe57f;
+}
+
+h3 {
+  color: #e3f2fd;
+}
+a:link {
+  color: #ffff8d;
+  font-style: bold;
+  text-decoration: underline;
+}
+
+#flag {
+ padding-left: 30%;
 }
