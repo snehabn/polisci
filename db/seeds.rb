@@ -16,6 +16,7 @@ candidates.each do |candidate|
   votes.each do |vote|
     Vote.create(vote: vote, candidate_id: c.id)
   end
+  VoteSmart::CandidateBio.request("CandidateBio.getDetailedBio", "candidateId" => 22377)
 end
 
 
