@@ -1,13 +1,20 @@
 <div class="container">
-<h1> Federal Officials </h1>
-<% @candidates.each do |candidate| %>
-<p><a href='/candidates/<%= candidate["candidateId"] %>'><%= candidate["lastName"] %></a></p>
-  <p>Office Position: <%= candidate["electionOffice"] %></p>
-<% end %>
-<h1> Local Officials </h1>
-<% @local_officials.each do |local_official| %>
-<p><a href='/candidates/<%= local_official["candidateId"] %>'><%= local_official["lastName"] %></a></p>
-  <p>Office Position: <%= local_official["officeName"] %></p>
-<% end %>
+  <h1> Federal Officials </h1>
+  <dl id="federal">
+    <% @candidates.each do |c| %>
+    <dt>Last Name:</dt>
+    <dd><a href='/candidates/<%= c.id %>'><%= c.candidate["firstName"] %><%= c.candidate["lastName"] %></a>
+    | Office Position:
+    <%= c.candidate["electionOffice"] %></dd>
+    <% end %>
+  </dl>
+  <h1> Local Officials </h1>
+  <dl id="local">
+  <% @local_candidates.each do |l| %>
+  <dt>Last Name:</dt>
+  <dd><a href='/candidates/<%= l.id %>'><%= l.local_candidate["firstName"] %><%= l.local_candidate["lastName"] %></a>
+  | Current Title: <%= l.local_candidate["officeName"] %></dd>
+  <% end %>
+  </dl>
 </div>
 
