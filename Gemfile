@@ -20,7 +20,6 @@ gem 'pry-byebug'
 
 gem 'shotgun'
 gem 'faker'
-gem 'chartkick'
 gem 'votesmart', '~> 0.4.1'
 gem 'dotenv'
 
