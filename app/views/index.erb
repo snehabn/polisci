@@ -1,24 +1,37 @@
-<div class="container">
-  <div class='left'>
-  <h1> Federal Officials </h1>
-  <dl id="federal">
-    <% @candidates.each do |c| %>
-    <dt>Last Name:</dt>
-    <dd><a href='/candidates/<%= c.id %>'><%= c.candidate["firstName"] %><%= c.candidate["lastName"] %></a>
-    | Office Position:
-    <%= c.candidate["electionOffice"] %></dd>
-    <% end %>
-  </dl>
+<img id="flag" src="http://bestanimations.com/Flags/USA/usa-american-flag-gif-3.gif">
+<div id="candidate-list">
+  <div class="container">
+    <div class='left'>
+      <h1> Federal Officials </h1>
+      <table style="width:100%" id="federal">
+       <tr>
+         <th>Last Name</th>
+         <th>Office Position</th>
+       </tr>
+
+       <% @candidates.each do |c| %>
+       <tr><td><a href='/candidates/<%= c.id %>'><%= c.candidate["firstName"] %>   <%= c.candidate["lastName"] %></a></td>
+
+        <td><%= c.candidate["electionOffice"] %></td></tr>
+        <% end %>
+
+      </table>
+    </div>
+    <div class='right'>
+      <h1>San Francisco Officials</h1>
+      <table style="width:100%" id="local">
+       <tr>
+         <th>Last Name</th>
+         <th>Current Position</th>
+       </tr>
+       <% @local_candidates.each do |l| %>
+       <tr>
+        <td><a href='/candidates/<%= l.id %>'><%= l.local_candidate["firstName"] %> <%= l.local_candidate["lastName"] %></a></td>
+        <td><%= l.local_candidate["officeName"] %></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
-  <div class='right'>
-  <h1>San Francisco Officials</h1>
-  <dl id="local">
-  <% @local_candidates.each do |l| %>
-  <dt>Last Name:</dt>
-  <dd><a href='/candidates/<%= l.id %>'><%= l.local_candidate["firstName"] %><%= l.local_candidate["lastName"] %></a>
-  | Current Title: <%= l.local_candidate["officeName"] %></dd>
-  <% end %>
-  </dl>
-  </div>
+</div>
 </div>
 
