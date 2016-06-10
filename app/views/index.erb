@@ -1,4 +1,5 @@
 <div class="container">
+  <div class='left'>
   <h1> Federal Officials </h1>
   <dl id="federal">
     <% @candidates.each do |c| %>
@@ -8,7 +9,9 @@
     <%= c.candidate["electionOffice"] %></dd>
     <% end %>
   </dl>
-  <h1> Local Officials </h1>
+  </div>
+  <div class='right'>
+  <h1>San Francisco Officials</h1>
   <dl id="local">
   <% @local_candidates.each do |l| %>
   <dt>Last Name:</dt>
@@ -16,5 +19,6 @@
   | Current Title: <%= l.local_candidate["officeName"] %></dd>
   <% end %>
   </dl>
+  </div>
 </div>
 
