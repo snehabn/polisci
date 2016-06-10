@@ -22,6 +22,8 @@ require 'erb'
 require 'faker'
 require 'bcrypt'
 require 'pry-byebug'
+
+require 'chartkick'
 require 'votesmart'
 require 'dotenv'
 Dotenv.load

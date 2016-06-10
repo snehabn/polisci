@@ -11,10 +11,10 @@ local_candidates.each do |local_candidate|
 end
 
 candidates.each do |candidate|
-  Candidate.create(candidate: candidate)
+  c = Candidate.create(candidate: candidate)
   votes = VoteSmart::Vote.request("Votes.getByOfficial", "candidateId" => candidate["candidateId"])
   votes.each do |vote|
-    Vote.create(vote: vote)
+    Vote.create(vote: vote, candidate_id: c.id)
   end
 end
 
