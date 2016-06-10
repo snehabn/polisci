@@ -1,6 +1,7 @@
-<div class='container'>
+<div class='candidate-info'>
  <% if @candidate.id == 2 %>
  <div class="Stats right">
+ <h2 class="official">Contact Info <i class="material-icons">perm_phone_msg</i></h2>
   <dl id="contact">
     <dt>Campaign Email:</dt>
     <dd><a href="press@hillaryclinton.com">press@hillaryclinton.com</a></dd>
@@ -19,19 +20,19 @@
     <dd>Phone: 646-854-1432</dd>
   </dl>
 
-  <h3><a href='https://spotfire.cloud.tibco.com/spotfire/wp/render/761194424092/analysis?file=/users/snehabn/Hillary&waid=x4bmLHwvuUCMqQhCTwWtg-090130450dAHUC&wavid=0'>Voting History</a></h3>
+  <h3 class='official'><a href='https://spotfire.cloud.tibco.com/spotfire/wp/render/761194424092/analysis?file=/users/snehabn/Hillary&waid=x4bmLHwvuUCMqQhCTwWtg-090130450dAHUC&wavid=0'>Voting History</a></h3>
 
 </div>
 <div class='left'>
 
-  <h2>Last Name: <%= @candidate.candidate["lastName"] %></h2>
+  <h2 class='official'>Last Name: <%= @candidate.candidate["lastName"] %></h2>
   <div class="Education">
-    <h3>Education</h3>
+    <h3 class="official">Education</h3>
     <li>JD, Yale University, 1973</li>
     <li>BA, Wellesley College, 1969</li>
   </div>
   <div class="Political">
-    <h3>Political Experience</h3>
+    <h3 class='official'>Political Experience</h3>
     <li>United States Secretary of State, 2009-2013</li>
     <li>Sworn In, United States Secretary of State, January 21, 2009</li>
     <li>Senator, United States Senate, 2001-2009</li>
@@ -40,7 +41,7 @@
     <li>First Lady, State of Arkansas, 1978-1980, 1982-1992</li>
   </div>
   <div class="Professional">
-    <h3>Professional Experience</h3>
+    <h3 class='official'>Professional Experience</h3>
     <li>Former Staff Attorney, Children's Defense Fund</li>
     <li>Former Board Member, Wal-Mart</li>
     <li>Attorney, Rose Law Firm, 1976-1992</li>
@@ -48,7 +49,7 @@
   </div>
 
   <div class="Addl">
-    <h3>Awards:</h3>
+    <h3 class='official'>Awards:</h3>
     <ul>
       <li>Humanitarian Award, Elie Wiesel Foundation</li>
       <li>Women Who Make A Difference Lifetime Achievement Award, Family Circle</li>
@@ -73,7 +74,9 @@
 </div>
 
 <% if @candidate.id == 4 %>
+
 <div class="Stats right">
+ <h2 class="official">Contact Info <i class="material-icons">perm_phone_msg</i></h2>
   <dl id="contact">
     <dt>Campaign Email:</dt>
     <dd><a href="bernie@bernie.org">bernie@bernie.org</a></dd>
@@ -89,19 +92,19 @@
     <dd>Phone: 802-862-1505</dd>
   </dl>
 
-  <h3><a href='https://spotfire.cloud.tibco.com/spotfire/wp/render/761194424092/analysis?file=/users/snehabn/Bernie&waid=WZPXQoUpS0ya1I17LUhdt-0901384efeYrmN&wavid=0'>Voting History</a></h3>
+  <h3 class='official'><a href='https://spotfire.cloud.tibco.com/spotfire/wp/render/761194424092/analysis?file=/users/snehabn/Bernie&waid=WZPXQoUpS0ya1I17LUhdt-0901384efeYrmN&wavid=0'>Voting History</a></h3>
 
 </div>
 <div class='left'>
 
-  <h2>Last Name: <%= @candidate.candidate["lastName"] %></h2>
+  <h2 class='official'>Last Name: <%= @candidate.candidate["lastName"] %></h2>
   <div class="Education">
-    <h3>Education</h3>
+    <h3 class='official'>Education</h3>
     <li>Attended, Brooklyn College</li>
     <li>BA, University of Chicago, 1964</li>
   </div>
   <div class="Political">
-    <h3>Political Experience</h3>
+    <h3 class='official'>Political Experience</h3>
     <li>Senator, United States Senate, 2006-present</li>
     <li>Representative, United States House of Representatives, 1990-2006</li>
     <li>Mayor, City of Burlington, 1981-1989</li>
@@ -110,7 +113,7 @@
     <li>Candidate, United States Senate, 1972, 1974</li>
   </div>
   <div class="Professional">
-    <h3>Professional Experience</h3>
+    <h3 class='official'>Professional Experience</h3>
     <li>Former Documentary Filmmaker</li>
     <li>Former Carpenter</li>
     <li>Journalist</li>
@@ -120,7 +123,7 @@
   </div>
 
   <div class="Addl">
-    <h3>Priority Issues:</h3>
+    <h3 class='official'>Priority Issues:</h3>
     <ul>
       <li>Progressive Tax Reform</li>
       <li>Worker's Rights</li>
@@ -131,7 +134,7 @@
       <li>Getting Our Priorities Right</li>
       <li>A Strong Safety Net</li>
     </ul>
-    <h3>Publications:</h3>
+    <h3 class='official'>Publications:</h3>
     <li>Absolutely Absurd: The Life & Times of Bernie Sanders (Sleepy Hollow Press, 2002)-Outsider in the House (Verso, 1997)</li>
 
   </div>
